@@ -1,22 +1,49 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AgmCoreModule} from '@agm/core';
+import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {MapComponent} from './map/map.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
+import {HomeComponent} from './home/home.component';
+
+import {MatMenuModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
+import 'hammerjs';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FlexLayoutModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC_DHvZ8M6MToO0J9OzmIosy6VOsDmmnM0'
-    })
+    }),
+    NgbModule.forRoot(),
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatButtonModule,
+    AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule {
