@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AppComponent} from './app.component';
 import {MapComponent} from './map/map.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { FooterComponent } from './footer/footer.component';
     MapComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent,
+    RegisterComponent,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

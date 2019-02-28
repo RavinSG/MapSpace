@@ -1,7 +1,6 @@
 import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {AgmMap, MapsAPILoader, MouseEvent} from '@agm/core';
 import {GoogleMapsAPIWrapper} from '@agm/core/services';
-import {template} from '@angular/core/src/render3';
 
 
 declare var google: any;
@@ -131,6 +130,11 @@ export class MapComponent implements OnInit {
     this.findAddressByCoordinates();
   }
 
+  lineDragged($event: MouseEvent) {
+    console.log($event);
+  }
+
+
   findAddressByCoordinates() {
     this.geocoder.geocode({
       'location': {
@@ -205,5 +209,10 @@ export class MapComponent implements OnInit {
 
   hideLine($event: MouseEvent) {
     console.log($event);
+
+  }
+
+  addCords() {
+    this.linePoints.push({lat: 7.021521, lng: 79.899476});
   }
 }
