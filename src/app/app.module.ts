@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import {AuthGuard} from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { AdminComponent } from './admin/admin.component';
     MatButtonModule,
     AngularFontAwesomeModule
   ],
-  providers: [GoogleMapsAPIWrapper],
+  providers: [GoogleMapsAPIWrapper, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
