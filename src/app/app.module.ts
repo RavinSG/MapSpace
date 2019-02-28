@@ -25,6 +25,8 @@ import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {AdminComponent} from './admin/admin.component';
 import {AuthGuard} from './services/auth.guard';
+import {AuthService} from './services/auth.service';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,7 @@ import {AuthGuard} from './services/auth.guard';
     AngularFontAwesomeModule,
     HttpClientModule
   ],
-  providers: [GoogleMapsAPIWrapper, AuthGuard],
+  providers: [GoogleMapsAPIWrapper, UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

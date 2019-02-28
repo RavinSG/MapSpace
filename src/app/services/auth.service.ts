@@ -16,7 +16,7 @@ interface LoginData {
 })
 export class AuthService {
 
-  loggedInStatus = false;
+  loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
 
   constructor(private http: HttpClient) {
   }
@@ -41,6 +41,7 @@ export class AuthService {
 
   setLoggedIn(login: boolean) {
     this.loggedInStatus = login;
+    localStorage.setItem('loggedIn', 'true');
   }
 
 }

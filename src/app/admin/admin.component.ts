@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  message = 'Loading...';
+
+  constructor(private user: UserService) {
+  }
 
   ngOnInit() {
+    this.user.getData().subscribe(data => {
+      this.message = data.message;
+    });
   }
 
 }

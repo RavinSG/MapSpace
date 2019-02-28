@@ -24,13 +24,12 @@ export class LoginComponent implements OnInit {
     console.log(username, password);
     this.auth.getUserDetails(username, password).subscribe(data => {
       if (data.success) {
-        this.router.navigate(['admin']);
-        this.auth.loggedInStatus = true;
+        this.router.navigate(['/admin']);
+        this.auth.setLoggedIn(true);
         console.log(this.auth.loggedInStatus);
         console.log('testing');
       } else {
         window.alert(data.message);
-        console.log(this.auth.loggedInStatus);
       }
     });
   }
