@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,12 +18,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import 'hammerjs';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {RegisterComponent} from './register/register.component';
+import {LoginComponent} from './login/login.component';
+import {AdminComponent} from './admin/admin.component';
 import {AuthGuard} from './services/auth.guard';
 
 @NgModule({
@@ -50,7 +51,8 @@ import {AuthGuard} from './services/auth.guard';
     MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    HttpClientModule
   ],
   providers: [GoogleMapsAPIWrapper, AuthGuard],
   bootstrap: [AppComponent]

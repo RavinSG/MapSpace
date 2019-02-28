@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 
-interface UserData {
+interface RegisterResponse {
   success: boolean;
-  message: string;
 }
 
-interface RegisterResonse {
+interface LoginData {
   success: boolean;
+  message: string;
 }
 
 @Injectable({
@@ -16,7 +16,7 @@ interface RegisterResonse {
 })
 export class AuthService {
 
-  private loggedInStatus = true;
+  loggedInStatus = false;
 
   constructor(private http: HttpClient) {
   }
@@ -26,19 +26,21 @@ export class AuthService {
   }
 
   getUserDetails(username, password) {
-    return this.http.post('http://localhost/mapSpace/auth.php', {
+    return this.http.post<LoginData>('/mapSpace/auth.php', {
       username,
       password
-    }).subscribe(data => {
-      console.log(data, 'is what we got');
     });
   }
 
   registerUser(username, password) {
-    return this.http.post<RegisterResonse>('/api/register', {
+    return this.http.post<RegisterResponse>('http://localhost:1234/register', {
       username,
       password
     });
+  }
+
+  setLoggedIn(login: boolean) {
+    this.loggedInStatus = login;
   }
 
 }
