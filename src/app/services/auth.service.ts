@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   registerUser(username, password) {
-    return this.http.post<RegisterResponse>('http://localhost:1234/register', {
+    return this.http.post<RegisterResponse>('/node/register', {
       username,
       password
     });

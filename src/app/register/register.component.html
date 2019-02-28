@@ -1,5 +1,7 @@
 <form (submit)="registerUser($event)">
+
   <div class="container">
+    <h2>Register User</h2>
     <div>
       <input type="text" autocomplete="off" placeholder="Username" id="username">
     </div>
@@ -9,6 +11,8 @@
     <div>
       <input type="password" autocomplete="off" placeholder="Confirm Password" id="cpassword">
     </div>
-    <input type="submit" value="Submit">
+    <div>
+      <button type="submit" id="submit">Submit</button>
+    </div>
   </div>
 </form>

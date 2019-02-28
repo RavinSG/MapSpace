@@ -14,6 +14,7 @@ import {HomeComponent} from './home/home.component';
 import {MatMenuModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
+import {MatInputModule} from '@angular/material/input'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -53,6 +54,7 @@ import {UserService} from './services/user.service';
     MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
+    MatInputModule,
     AngularFontAwesomeModule,
     HttpClientModule
   ],
