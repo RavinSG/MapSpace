@@ -4,12 +4,30 @@ const app = express();
 const mongoose = require('mongoose');
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost:27017').then(
+mongoose.connect('mongodb://localhost:27017/MapSpace').then(
   () => console.log("Mongoose Up")
 );
+
+const User = require('./schemas/users');
+
 app.use(bodyParser.json());
 
-app.post('/node/register/MapSpace', (req, res) => {
+app.post('/node/login', async (req, res) => {
+  const {username, password} = req.body;
+  console.log(username, password);
+  const resp = await User.find();
+  console.log(resp);
+  if (!resp) {
+    console.log("incorrect details");
+    // wrong credentials
+  } else {
+    console.log("Logged in");
+  }
+  res.send("F U");
+
+});
+
+app.post('/node/register', (req, res) => {
   console.log(req.body);
   const {username, password} = req.body;
   //store on db

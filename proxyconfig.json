@@ -1,6 +1,6 @@
 {
-  "/mapSpace": {
-    "target": "http://localhost:80",
+  "/python": {
+    "target": "http://localhost:5000",
     "secure": false,
     "changeOrigin": true
   },

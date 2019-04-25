@@ -1,6 +1,6 @@
 <div></div>
 <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true"
-         [zoomControl]="true" [(fitBounds)]='location.viewport' (mapClick)="logEvent($event)" mapTypeId="satellite">
+         [zoomControl]="true" [(fitBounds)]='location.viewport' (mapClick)="logEvent($event)" mapTypeId="hybrid">
   <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng"
               [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)'></agm-marker>
   <agm-circle [latitude]="location.lat" [longitude]="location.lng"
@@ -10,6 +10,7 @@
               [(visible)]="circleVisible"
               [editable]="true"></agm-circle>
   <agm-polyline (lineClick)="hideLine($event)"
+                (lineDblClick)="dbLine($event)"
                 [editable]="true" (lineDrag)="lineDragged($event)">
     <agm-polyline-point id="line"
       *ngFor="let line of linePoints"
@@ -17,6 +18,7 @@
       [longitude]="line.lng"
       (drag)="lineDragged($event)"></agm-polyline-point>
   </agm-polyline>
+  <agm-data-layer></agm-data-layer>
 </agm-map>
 
 <div class="container-fluid">
@@ -65,5 +67,8 @@
   </div>
   <div>
     <button (click)="addCords()">Add Coordinate</button>
+  </div>
+  <div>
+    <button (click)="sendCords()">Send Coordinate</button>
   </div>
 </div>

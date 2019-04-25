@@ -1,7 +1,7 @@
 import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
-import {AgmMap, MapsAPILoader, MouseEvent} from '@agm/core';
+import {AgmMap, MapsAPILoader, MouseEvent, PolyMouseEvent} from '@agm/core';
 import {GoogleMapsAPIWrapper} from '@agm/core/services';
-
+import {MapDataService} from '../services/map-data.service';
 
 declare var google: any;
 
@@ -35,10 +35,7 @@ export class MapComponent implements OnInit {
   geocoder: any;
   circleRadius = 5000;
   circleVisible = false;
-  linePoints = [
-    {lat: 7.021521, lng: 79.899476},
-    {lat: 7.021531, lng: 79.899429},
-  ];
+  linePoints = [];
   public location: Location = {
     lat: 7.021521,
     lng: 79.899476,
@@ -54,7 +51,8 @@ export class MapComponent implements OnInit {
 
   constructor(public mapsApiLoader: MapsAPILoader,
               private zone: NgZone,
-              private wrapper: GoogleMapsAPIWrapper) {
+              private wrapper: GoogleMapsAPIWrapper,
+              private mapData: MapDataService) {
     this.mapsApiLoader = mapsApiLoader;
     this.zone = zone;
     this.wrapper = wrapper;
@@ -207,12 +205,26 @@ export class MapComponent implements OnInit {
     });
   }
 
-  hideLine($event: MouseEvent) {
-    console.log($event);
+  hideLine($event: PolyMouseEvent) {
+    console.log($event.edge);
+    console.log($event.vertex);
+    console.log($event.path);
+
+  }
+
+  dbLine($event: PolyMouseEvent) {
+    console.log($event.edge);
 
   }
 
   addCords() {
     this.linePoints.push({lat: 7.021521, lng: 79.899476});
+  }
+
+  sendCords() {
+    this.mapData.sendCords(this.linePoints).subscribe(data => {
+        console.log(data);
+      }
+    );
   }
 }

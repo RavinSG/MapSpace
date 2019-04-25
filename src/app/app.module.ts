@@ -14,7 +14,7 @@ import {HomeComponent} from './home/home.component';
 import {MatMenuModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
-import {MatInputModule} from '@angular/material/input'
+import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -28,6 +28,7 @@ import {AdminComponent} from './admin/admin.component';
 import {AuthGuard} from './services/auth.guard';
 import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
+import {MapDataService} from './services/map-data.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import {UserService} from './services/user.service';
     AngularFontAwesomeModule,
     HttpClientModule
   ],
-  providers: [GoogleMapsAPIWrapper, UserService, AuthService, AuthGuard],
+  providers: [GoogleMapsAPIWrapper, UserService, AuthService, AuthGuard, MapDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

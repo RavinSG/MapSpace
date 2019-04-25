@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 interface RegisterResponse {
@@ -10,6 +10,12 @@ interface LoginData {
   success: boolean;
   message: string;
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +32,7 @@ export class AuthService {
   }
 
   getUserDetails(username, password) {
-    return this.http.post<LoginData>('/mapSpace/auth.php', {
+    return this.http.post<LoginData>('/python/login', {
       username,
       password
     });
@@ -36,7 +42,7 @@ export class AuthService {
     return this.http.post<RegisterResponse>('/node/register', {
       username,
       password
-    });
+    }, httpOptions);
   }
 
   setLoggedIn(login: boolean) {

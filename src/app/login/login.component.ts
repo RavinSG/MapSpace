@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     const password = target.querySelector('#password').value;
     console.log(username, password);
     this.auth.getUserDetails(username, password).subscribe(data => {
+      console.log(data);
+      console.log('here');
       if (data.success) {
         this.router.navigate(['/admin']);
         this.auth.setLoggedIn(true);

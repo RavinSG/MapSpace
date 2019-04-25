@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getData() {
-    return this.http.get<LoginData>('/mapSpace/database.php');
+    return this.http.get<LoginData>('/python/database');
   }
 
 }
