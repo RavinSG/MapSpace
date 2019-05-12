@@ -1,5 +1,5 @@
-import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
-import {AgmMap, MapsAPILoader, MouseEvent, PolyMouseEvent} from '@agm/core';
+import {Component, EventEmitter, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AgmMap, LatLngLiteral, MapsAPILoader, MouseEvent, PolyMouseEvent} from '@agm/core';
 import {GoogleMapsAPIWrapper} from '@agm/core/services';
 import {MapDataService} from '../services/map-data.service';
 
@@ -128,7 +128,8 @@ export class MapComponent implements OnInit {
     this.findAddressByCoordinates();
   }
 
-  lineDragged($event: MouseEvent) {
+  lineDragged($event: EventEmitter<LatLngLiteral>) {
+
     console.log($event);
   }
 

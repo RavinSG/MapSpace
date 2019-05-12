@@ -9,14 +9,15 @@
               [circleDraggable]="true"
               [(visible)]="circleVisible"
               [editable]="true"></agm-circle>
+  <agm-polygon [paths]="linePoints" [editable]="true" [visible]="true"></agm-polygon>
   <agm-polyline (lineClick)="hideLine($event)"
                 (lineDblClick)="dbLine($event)"
                 [editable]="true" (lineDrag)="lineDragged($event)">
     <agm-polyline-point id="line"
-      *ngFor="let line of linePoints"
-      [latitude]="line.lat"
-      [longitude]="line.lng"
-      (drag)="lineDragged($event)"></agm-polyline-point>
+                        *ngFor="let line of linePoints"
+                        [latitude]="line.lat"
+                        [longitude]="line.lng"
+                        (drag)="lineDragged($event)"></agm-polyline-point>
   </agm-polyline>
   <agm-data-layer></agm-data-layer>
 </agm-map>

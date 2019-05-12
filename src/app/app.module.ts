@@ -8,11 +8,13 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AppComponent} from './app.component';
 import {MapComponent} from './map/map.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 
 import {MatMenuModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,6 +31,7 @@ import {AuthGuard} from './services/auth.guard';
 import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
 import {MapDataService} from './services/map-data.service';
+import {DrawComponent} from './draw/draw.component';
 
 @NgModule({
   declarations: [
@@ -40,15 +43,18 @@ import {MapDataService} from './services/map-data.service';
     DashboardComponent,
     RegisterComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    DrawComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FlexLayoutModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_DHvZ8M6MToO0J9OzmIosy6VOsDmmnM0'
+      apiKey: 'AIzaSyC_DHvZ8M6MToO0J9OzmIosy6VOsDmmnM0',
+      libraries: ['drawing', 'places']
     }),
     NgbModule.forRoot(),
     BrowserAnimationsModule,
@@ -56,6 +62,8 @@ import {MapDataService} from './services/map-data.service';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
+    MatCardModule,
     AngularFontAwesomeModule,
     HttpClientModule
   ],
