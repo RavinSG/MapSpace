@@ -1,12 +1,16 @@
 <div class="background">
   <div class="parent" align="center">
     <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="outline" >
-        <input matInput placeholder="Enter Location">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input matInput placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off"
+               type="text"
+               class="form-control" #search [formControl]="searchControl">
         <mat-icon matSuffix>near_me</mat-icon>
       </mat-form-field>
-      <button mat-stroked-button color="white">Search Location</button>
+      <button mat-stroked-button color="white" (click)="showPlace()" [routerLink]="['/draw',location]">Search Location
+      </button>
 
     </form>
   </div>
+
 </div>

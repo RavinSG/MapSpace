@@ -1,7 +1,5 @@
-<div class="container">
+<agm-map [(latitude)]="center.lat" [(longitude)]="center.lng"
+         (mapReady)="onMapReady($event)" mapTypeId="hybrid"
+         [(zoom)]="center.zoom">
+</agm-map>
 
-  <agm-map [latitude]="center.lat" [longitude]="center.lng"
-           (mapReady)="onMapReady($event)" mapTypeId="hybrid"
-           [(zoom)]="center.zoom">
-  </agm-map>
-</div>

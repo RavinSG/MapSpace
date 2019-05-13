@@ -18,6 +18,6 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
-  {path: 'draw', component: DrawComponent}
+  {path: 'draw', component: DrawComponent},
 ];
 
