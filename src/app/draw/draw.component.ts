@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Params, ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
+import {MatButtonToggleChange} from '@angular/material/typings/esm5/button-toggle';
 
 declare const google: any;
 
@@ -11,10 +12,8 @@ declare const google: any;
 })
 export class DrawComponent {
 
-  panelOpenState = false;
+  mapType = 'hybrid';
 
-
-  showFiller = false;
   details = {
     'lng': 0,
     'lat': 0
@@ -48,6 +47,7 @@ export class DrawComponent {
     this.initDrawingManager(map);
   }
 
+
   initDrawingManager(map: any) {
     const options = {
       drawingControl: true,
@@ -65,20 +65,38 @@ export class DrawComponent {
     const drawingManager = new google.maps.drawing.DrawingManager(options);
     drawingManager.setMap(map);
     google.maps.event.addListener(drawingManager, 'overlaycomplete', function (shape) {
-      if (shape.type === 'polygon') {
-        console.log(shape);
+      function createPath(pathShape) {
         const coordinates = [];
-        const len = shape.overlay.getPath().getLength();
-        const path = shape.overlay.getPath();
+        const len = pathShape.getPath().getLength();
+        const path = pathShape.getPath();
         for (let i = 0; i < len; i++) {
           const vertex = path.getAt(i);
-          console.log('lat', vertex.lat());
-          console.log('lng', vertex.lng());
           coordinates.push(vertex.lat(), vertex.lng());
         }
+        return coordinates;
+      }
+
+      if (shape.type === 'polygon') {
+        const newShape = shape.overlay;
+        newShape.type = shape.type;
+        console.log(newShape);
+        let coordinates = createPath(newShape);
         console.log(coordinates);
-        google.maps.event.addListener(shape, 'remove_at', function (event) {
-          console.log(event);
+
+        google.maps.event.addListener(newShape.getPath(), 'dragend', function () {
+          console.log('testing');
+        });
+        newShape.getPaths().forEach(function (path, index) {
+
+          google.maps.event.addListener(path, 'set_at', function () {
+            coordinates = createPath(newShape);
+            console.log(coordinates);
+          });
+          google.maps.event.addListener(path, 'insert_at', function () {
+            coordinates = createPath(newShape);
+            console.log(coordinates);
+          });
+
         });
       }
     });
@@ -87,8 +105,9 @@ export class DrawComponent {
     });
   }
 
-  triggerResize() {
-
+  mapChange(event: MatButtonToggleChange) {
+    this.mapType = event.value;
+    console.log(event.value);
   }
 
 
