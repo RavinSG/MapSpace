@@ -1,3 +1,23 @@
 agm-map{
   height: 1000px;
 }
+
+.example-container {
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+  width: 400px;
+}
+

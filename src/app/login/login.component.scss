@@ -1,36 +1,28 @@
-form {
-  display: flex;
-  position: absolute;
-  width: 100%;
+mat-form-field{
+  width: 300px;
+}
+
+.card{
+  width: 400px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.parent{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.background{
+  display: table;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  background-image: url("../../assets/login.png");
+  background-size: cover;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: #eee;
-  border-radius: 20px;
-}
-
-input#username, #password{
-  outline: 0;
-  font-size: 20px;
-  padding: 5px 10px;
-}
-
-button#submit {
-  background-color: darkgray;
-  text-align: center;
-  margin: 20px;
-  padding: 20px;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 20px;
-  border: none;
+.example-header-image {
+  background-image: url("../../assets/login-icon.jpg");
+  background-size: cover;
 }

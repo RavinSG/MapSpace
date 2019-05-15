@@ -1,8 +1,7 @@
 <mat-grid-list cols="4" rowHeight="400px">
   <mat-grid-tile
     [colspan]=2
-    [rowspan]=1
-  >
+    [rowspan]=1>
     <mat-card style="margin-top: 10px; margin-bottom: 10px; ">
       <mat-card-header>
         <div mat-card-avatar class="weather"></div>
@@ -16,10 +15,8 @@
   </mat-grid-tile>
 
   <mat-grid-tile
-
     [colspan]=2
-    [rowspan]=1
-  >
+    [rowspan]=1>
 
     <mat-card class="value_card">
       <mat-card-header>
@@ -40,11 +37,11 @@
             <div class="example-element-detail"
                  [@detailExpand]="land == expandedLand ? 'expanded' : 'collapsed'">
               <div class="example-element-diagram">
-                <img src={{land.src}} width="80" height="105">
+                <img src={{land.src}} width="120" height="105">
               </div>
               <div class="example-element-description">
                 {{land.description}}
-                <span class="example-element-description-attribution"> -- Wikipedia </span>
+                <span class="example-element-description-attribution"> -- Prime Lands </span>
               </div>
             </div>
           </td>

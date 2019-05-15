@@ -11,7 +11,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 
-import {MatGridListModule, MatMenuModule, MatTableModule} from '@angular/material';
+import {
+  MatButtonToggleModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatMenuModule, MatSelectModule,
+  MatSidenavModule, MatSlideToggleModule,
+  MatTableModule
+} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material';
@@ -66,6 +73,11 @@ import {DrawComponent} from './draw/draw.component';
     MatIconModule,
     MatCardModule,
     MatTableModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
     AngularFontAwesomeModule,
     HttpClientModule
   ],

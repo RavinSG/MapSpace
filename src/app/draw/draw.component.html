@@ -1,5 +1,94 @@
-<agm-map [(latitude)]="center.lat" [(longitude)]="center.lng"
-         (mapReady)="onMapReady($event)" mapTypeId="hybrid"
-         [(zoom)]="center.zoom">
-</agm-map>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Area Details
+          </mat-panel-title>
+          <mat-panel-description>
+            General information
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-card>
+          Average land value: 10000 <br>
+          Weather: 12<br>
+          asdad: 2es
+        </mat-card>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Settings
+        </mat-panel-title>
+        <mat-panel-description>
+          Change map settings
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <h2>Select Map type</h2>
+      <mat-button-toggle-group name="mapStyle" aria-label="Font Style">
+        <mat-button-toggle value="satellite">Satellite</mat-button-toggle>
+        <mat-button-toggle value="roadMap">Road Map</mat-button-toggle>
+        <mat-button-toggle value="hybrid" checked>Hybrid</mat-button-toggle>
+        <mat-button-toggle value="terrain">Terrain</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <h2>Enable Sphere Geometry</h2>
+      <mat-slide-toggle color="primary"></mat-slide-toggle>
+
+      <h2>Unit Conversion</h2>
+      <mat-form-field>
+        <mat-label>Select Unit</mat-label>
+        <mat-select value="km" (selectionChange)="triggerResize()">
+          <mat-option value="km">km</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-expansion-panel>
+
+
+    <mat-card style="text-align: center; background-color: gray">
+      <mat-card-header>Calculated Area :</mat-card-header>
+      <mat-card-content style="align-content: center; margin-bottom: 10px; font-size: 20px">
+        <br>
+        1000 KM
+
+      </mat-card-content>
+    </mat-card>
+
+
+  </mat-drawer>
+
+  <!--
+    <agm-map [(latitude)]="center.lat" [(longitude)]="center.lng"
+             (mapReady)="onMapReady($event)" mapTypeId="hybrid"
+             [(zoom)]="center.zoom">
+    </agm-map>
+  --->
+  <p style="height: 1000px">sfsknl</p>
+</mat-drawer-container>
+
+
+
 

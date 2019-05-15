@@ -11,9 +11,19 @@ declare const google: any;
 })
 export class DrawComponent {
 
+  panelOpenState = false;
+
+
+  showFiller = false;
   details = {
     'lng': 0,
     'lat': 0
+  };
+
+  center: any = {
+    lat: 6.796867,
+    lng: 79.900196,
+    zoom: 16
   };
 
   constructor(private route: ActivatedRoute) {
@@ -21,25 +31,18 @@ export class DrawComponent {
   }
 
   ngOnInit() {
-    const result1 = this.route.params.pipe(
-      switchMap((params: Params) => this.details['lng'] = params['lng'])
-    ).subscribe();
-    const result2 = this.route.params.pipe(
-      switchMap((params: Params) => this.details['lat'] = params['lat'])
-    ).subscribe();
-
-    if (this.details.lat !== 0) {
+    if (this.route.snapshot.queryParams['lng']) {
+      const result1 = this.route.params.pipe(
+        switchMap((params: Params) => this.details['lng'] = params['lng'])
+      ).subscribe();
+      const result2 = this.route.params.pipe(
+        switchMap((params: Params) => this.details['lat'] = params['lat'])
+      ).subscribe();
       this.center.lat = Number(this.details.lat);
       this.center.lng = Number(this.details.lng);
       console.log(typeof (Number(this.details.lat)));
     }
   }
-
-  center: any = {
-    lat: 33.5362475,
-    lng: -111.9267386,
-    zoom: 16
-  };
 
   onMapReady(map) {
     this.initDrawingManager(map);
@@ -82,6 +85,10 @@ export class DrawComponent {
     google.maps.event.addListener(drawingManager, 'drawingmode_changed', function (e) {
       console.log('drawing mode changed:' + drawingManager.getDrawingMode());
     });
+  }
+
+  triggerResize() {
+
   }
 
 
