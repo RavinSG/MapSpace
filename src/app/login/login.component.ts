@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -26,12 +28,14 @@ export class LoginComponent implements OnInit {
       console.log(data);
       console.log('here');
       if (data.success) {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/dashboard']);
         this.auth.setLoggedIn(true);
         console.log(this.auth.loggedInStatus);
         console.log('testing');
       } else {
-        window.alert(data.message);
+        this.snackBar.open('Wrong credentials', 'Try again',{
+          duration: 3000,
+        });
       }
     });
   }

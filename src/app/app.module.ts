@@ -16,7 +16,7 @@ import {
   MatExpansionModule,
   MatGridListModule,
   MatMenuModule, MatSelectModule,
-  MatSidenavModule, MatSlideToggleModule,
+  MatSidenavModule, MatSlideToggleModule, MatSnackBarModule,
   MatTableModule
 } from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
@@ -74,6 +74,7 @@ import {DrawComponent} from './draw/draw.component';
     MatCardModule,
     MatTableModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatExpansionModule,
