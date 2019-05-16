@@ -39,7 +39,7 @@
       </mat-button-toggle-group>
 
       <h2>Enable Sphere Geometry</h2>
-      <mat-slide-toggle color="primary"></mat-slide-toggle>
+      <mat-slide-toggle color="primary" (change)="geoChange($event)"></mat-slide-toggle>
 
       <h2>Unit Conversion</h2>
       <mat-form-field>
@@ -61,7 +61,7 @@
       <mat-card-header>Calculated Area :</mat-card-header>
       <mat-card-content style="align-content: center; margin-bottom: 10px; font-size: 20px">
         <br>
-        1000 KM
+        {{coordinates.val}}
 
       </mat-card-content>
     </mat-card>
@@ -75,7 +75,6 @@
            [(zoom)]="center.zoom">
   </agm-map>
 
-  <p style="height: 1000px">sfsknl</p>
 </mat-drawer-container>
 
 
