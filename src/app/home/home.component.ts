@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
       'lng': this.longitude,
       'lat': this.latitude
     };
+    console.log(this.location);
   }
 
 }

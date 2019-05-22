@@ -1,20 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+import {LandDetail} from '../shared/landDetails';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MapDataService {
+export class LandDataService {
 
   constructor(private http: HttpClient) {
   }
 
-  sendCords(cords, sphere) {
-    return this.http.post<number>('/python/get_cords', {
-      cords,
-      sphere
-    });
+  public getLandValues() {
+    return this.http.get<[LandDetail]>('/python/landvalue');
   }
-
 }

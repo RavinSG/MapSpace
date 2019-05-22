@@ -5,6 +5,7 @@ div.chart {
 
 .value_card {
   max-width: 800px;
+  overflow-scrolling: auto;
 }
 
 .weather {
@@ -67,3 +68,12 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
+.saved {
+  background-image: url('../../assets/bookmark.png');
+  background-size: cover;
+}
+
+.dashboard{
+  background-image: url('../../assets/dashboard.jpg');
+  background-size: cover;
+}

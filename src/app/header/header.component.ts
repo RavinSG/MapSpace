@@ -1,4 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
+
+
+export interface Logout {
+  message: string;
+}
 
 @Component({
   selector: 'app-header',
@@ -7,7 +15,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  constructor(private http: HttpClient,
+              private router: Router,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -15,6 +25,19 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+    let logged_out: string;
+    this.http.post<Logout>('/python/logout', {})
+      .subscribe(data => {
+        console.log(data);
+        logged_out = data.message;
+        console.log(logged_out);
+        if (logged_out === 'logout') {
+          this.auth.loggedInStatus = false;
+          this.router.navigate(['/home']);
+        }
+      });
+
+
   }
 
 }

@@ -4,54 +4,23 @@ import {LandDataService} from '../services/land-data.service';
 import {Chart} from 'chart.js';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {LandDetail} from '../shared/landDetails';
+import {MatTableDataSource} from '@angular/material';
 
-// const LAND_DATA: LandDetail[] = [
-//   {
-//     ID: 1,
-//     Land_Area: 'Hydrogen',
-//     Price: 1.0079,
-//     City: 'H',
-//     description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-//         atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
-//     src: '../../assets/moneybag.jpg'
-//   }, {
-//     ID: 2,
-//     Land_Area: 'Helium',
-//     Price: 4.0026,
-//     City: 'He',
-//     description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-//         colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-//         group in the periodic table. Its boiling point is the lowest among all the elements.`,
-//     src: '../../assets/moneybag.jpg'
-//   }, {
-//     ID: 3,
-//     Land_Area: 'lasldads',
-//     Price: 6.941,
-//     City: 'Li',
-//     description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-//         silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-//         lightest solid element.`,
-//     src: '../../assets/moneybag.jpg'
-//   }, {
-//     ID: 4,
-//     Land_Area: 'Beryllium',
-//     Price: 9.0122,
-//     City: 'Be',
-//     description: `Beryllium is a chemical element with symbol Be and atomic number 4. It is a
-//         relatively rare element in the universe, usually occurring as a product of the spallation of
-//         larger atomic nuclei that have collided with cosmic rays.`,
-//     src: '../../assets/moneybag.jpg'
-//   }, {
-//     ID: 8,
-//     Land_Area: 'Oxygen',
-//     Price: 15.9994,
-//     City: 'O',
-//     description: `Oxygen is a chemical element with symbol O and atomic number 8. It is a member of
-//          the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-//          agent that readily forms oxides with most elements as well as with other compounds.`,
-//     src: '../../assets/moneybag.jpg'
-//   }];
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -69,10 +38,11 @@ import {LandDetail} from '../shared/landDetails';
 
 export class DashboardComponent implements OnInit {
 
-  dataSource: [LandDetail];
+  dataSource;
   dataColumns = ['Land_Area', 'Price', 'ID', 'City'];
   expandedLand: LandDetail | null;
-
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource2 = ELEMENT_DATA;
 
   public colour = 'lightblue';
   @ViewChild('chart') chartElementRef: ElementRef;
@@ -82,8 +52,12 @@ export class DashboardComponent implements OnInit {
               private landService: LandDataService) {
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnInit() {
-    this.landService.getLandValues().subscribe(data => this.dataSource = data);
+    this.landService.getLandValues().subscribe(data => this.dataSource = new MatTableDataSource(data));
     this.userService.dailyForecast()
       .subscribe(res => {
         const temp_max = res['list'].map(res => res.main.temp_max);
@@ -107,13 +81,7 @@ export class DashboardComponent implements OnInit {
                 data: temp_max,
                 borderColor: '#3cba9f',
                 fill: false,
-                label: 'Max temp'
-              },
-              {
-                data: temp_min,
-                borderColor: '#ffcc00',
-                fill: false,
-                label: 'Min temp'
+                label: 'Temperature'
               }
             ]
           },

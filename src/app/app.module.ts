@@ -15,7 +15,7 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatGridListModule,
-  MatMenuModule, MatSelectModule,
+  MatMenuModule, MatPaginatorModule, MatSelectModule,
   MatSidenavModule, MatSlideToggleModule, MatSnackBarModule,
   MatTableModule
 } from '@angular/material';
@@ -77,13 +77,15 @@ import {DrawComponent} from './draw/draw.component';
     MatSnackBarModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatPaginatorModule,
     MatExpansionModule,
     MatButtonToggleModule,
     AngularFontAwesomeModule,
     HttpClientModule
   ],
   providers: [GoogleMapsAPIWrapper, UserService, AuthService, AuthGuard, MapDataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }

@@ -11,6 +11,7 @@ interface LoginData {
   message: string;
 }
 
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -22,12 +23,19 @@ const httpOptions = {
 })
 export class AuthService {
 
-  loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
+  public loggedInStatus;
 
   constructor(private http: HttpClient) {
   }
 
   get isLoggedIn() {
+    this.http.post<LoginData>('/python/login', {})
+      .subscribe(data => {
+          this.loggedInStatus = data.success;
+          console.log(data);
+        }
+      )
+    ;
     return this.loggedInStatus;
   }
 

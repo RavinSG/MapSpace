@@ -2,6 +2,7 @@ import {Component, DoCheck, KeyValueDiffer, KeyValueDiffers, OnInit} from '@angu
 import {Params, ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {MatButtonToggleChange, MatSnackBar} from '@angular/material';
+import {MapDataService} from '../services/map-data.service';
 
 
 declare const google: any;
@@ -13,11 +14,12 @@ declare const google: any;
 })
 export class DrawComponent implements OnInit, DoCheck {
 
-  public coordinates = {val: 1};
+  public coordinates = {val: null};
 
   mapType = 'hybrid';
   private pathDiffer: KeyValueDiffer<string, any>;
-  private enableGeo: boolean;
+  private enableGeo = false;
+  private area = 0;
 
   details = {
     'lng': 0,
@@ -33,14 +35,15 @@ export class DrawComponent implements OnInit, DoCheck {
 
   constructor(private route: ActivatedRoute,
               private differs: KeyValueDiffers,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private mapData: MapDataService) {
 
   }
 
   ngOnInit() {
     this.pathDiffer = this.differs.find(this.coordinates).create();
-
-    if (this.route.snapshot.queryParams['lng']) {
+    console.log('params', this.route.snapshot.params);
+    if (this.route.snapshot.params['lng']) {
       this.route.params.pipe(
         switchMap((params: Params) => this.details['lng'] = params['lng'])
       ).subscribe();
@@ -49,7 +52,7 @@ export class DrawComponent implements OnInit, DoCheck {
       ).subscribe();
       this.center.lat = Number(this.details.lat);
       this.center.lng = Number(this.details.lng);
-      console.log(typeof (Number(this.details.lat)));
+
     }
   }
 
@@ -57,6 +60,8 @@ export class DrawComponent implements OnInit, DoCheck {
     const changes = this.pathDiffer.diff(this.coordinates);
     if (changes) {
       console.log(this.coordinates);
+      console.log(this.enableGeo);
+      this.sendCords(this.coordinates, this.enableGeo);
     }
   }
 
@@ -72,6 +77,15 @@ export class DrawComponent implements OnInit, DoCheck {
         duration: 1000
       });
     }
+
+    this.sendCords(this.coordinates, this.enableGeo);
+  }
+
+  sendCords(coordinates, sphere) {
+    this.mapData.sendCords(coordinates, sphere).subscribe(data => {
+        this.area = data;
+      }
+    );
   }
 
   onMapReady(map) {
