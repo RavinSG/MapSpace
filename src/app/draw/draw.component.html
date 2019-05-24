@@ -44,13 +44,14 @@
       <h2>Unit Conversion</h2>
       <mat-form-field>
         <mat-label>Select Unit</mat-label>
-        <mat-select value="km" (selectionChange)="triggerResize()">
-          <mat-option value="km">km</mat-option>
-          <mat-option value="12px">12px</mat-option>
-          <mat-option value="14px">14px</mat-option>
-          <mat-option value="16px">16px</mat-option>
-          <mat-option value="18px">18px</mat-option>
-          <mat-option value="20px">20px</mat-option>
+        <mat-select value="sq.kms" (selectionChange)="convertUnits($event)">
+          <mat-option value="sq.kms">Square kilometer</mat-option>
+          <mat-option value="sq.meters">Square meter</mat-option>
+          <mat-option value="sq.miles">Square mile</mat-option>
+          <mat-option value="sq.feet">Square feet</mat-option>
+          <mat-option value="Acre">Acres</mat-option>
+          <mat-option value="Hectare">Hectare</mat-option>
+          <mat-option value="Perch">Perch</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -61,11 +62,13 @@
       <mat-card-header>Calculated Area :</mat-card-header>
       <mat-card-content style="align-content: center; margin-bottom: 10px; font-size: 20px">
         <br>
-        {{area}}
+        {{area}} {{unitType}}
 
       </mat-card-content>
     </mat-card>
-
+    <mat-card style="text-align: center">
+      <button mat-raised-button color="primary" (click)="saveArea()">Save Area</button>
+    </mat-card>
 
   </mat-drawer>
 

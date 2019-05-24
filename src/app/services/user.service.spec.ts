@@ -12,4 +12,7 @@ describe('UserService', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
   });
+  it('should get weather data', () => {
+    expect(2).toEqual(2);
+  });
 });

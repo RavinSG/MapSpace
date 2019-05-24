@@ -17,4 +17,21 @@ export class MapDataService {
     });
   }
 
+  convertUnits(from_unit: string, to_unit: string, area: number) {
+    return this.http.post<number>('/python/convert', {
+      from_unit,
+      to_unit,
+      area
+    });
+  }
+
+  saveArea(area: number, coordinates: object, center: object, unitType: string) {
+    return this.http.post<string>('/python/saveArea', {
+      area,
+      coordinates,
+      center,
+      unitType
+    });
+  }
+
 }

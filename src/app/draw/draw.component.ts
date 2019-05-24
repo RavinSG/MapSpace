@@ -3,6 +3,7 @@ import {Params, ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {MatButtonToggleChange, MatSnackBar} from '@angular/material';
 import {MapDataService} from '../services/map-data.service';
+import {MatSelectChange} from '@angular/material/typings/esm5/select';
 
 
 declare const google: any;
@@ -20,6 +21,7 @@ export class DrawComponent implements OnInit, DoCheck {
   private pathDiffer: KeyValueDiffer<string, any>;
   private enableGeo = false;
   private area = 0;
+  private unitType = 'sq.kms';
 
   details = {
     'lng': 0,
@@ -164,6 +166,22 @@ export class DrawComponent implements OnInit, DoCheck {
     this.mapType = event.value;
     console.log(event.value);
     console.log(this.coordinates);
+  }
+
+  convertUnits(event: MatSelectChange) {
+    console.log(event);
+    const new_unit = event.value;
+    this.mapData.convertUnits(this.unitType, new_unit, this.area)
+      .subscribe(data => {
+        this.area = data;
+        this.unitType = new_unit;
+      });
+  }
+
+  saveArea() {
+    console.log(this.area, this.coordinates, this.center, this.unitType);
+    this.mapData.saveArea(this.area, this.coordinates, this.center, this.unitType)
+      .subscribe(data => console.log(data));
   }
 
 
