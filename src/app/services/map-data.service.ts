@@ -1,19 +1,26 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
+export interface Area {
+  area: number;
+  area_p: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class MapDataService {
 
   constructor(private http: HttpClient) {
   }
 
-  sendCords(cords, sphere) {
-    return this.http.post<number>('/python/get_cords', {
+  sendCords(cords, sphere, unit) {
+    return this.http.post<Area>('/python/get_cords', {
       cords,
-      sphere
+      sphere,
+      unit
     });
   }
 
@@ -34,4 +41,13 @@ export class MapDataService {
     });
   }
 
+  landValue(city: string) {
+    return this.http.post<number>('/python/getLandValue', {
+      city
+    });
+  }
+
+  reset() {
+    return this.http.post('/python/reset', {});
+  }
 }

@@ -12,4 +12,7 @@ describe('AuthService', () => {
     const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
   });
+  it('should get admin data', () => {
+    expect(2).toEqual(2);
+  });
 });

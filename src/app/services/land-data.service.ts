@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LandDetail} from '../shared/landDetails';
+import {LandDetail, SavedLand} from '../shared/landDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,9 @@ export class LandDataService {
 
   public getLandValues() {
     return this.http.get<[LandDetail]>('/python/landvalue');
+  }
+
+  getSavedLands() {
+    return this.http.post<[SavedLand]>('/python/getLands', {});
   }
 }

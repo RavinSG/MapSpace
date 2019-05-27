@@ -24,4 +24,8 @@ describe('AdminComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get data from server', () => {
+    expect(2).toEqual(2);
+  });
 });

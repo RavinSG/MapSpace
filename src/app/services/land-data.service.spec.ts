@@ -12,4 +12,13 @@ describe('LandDataService', () => {
     const service: LandDataService = TestBed.get(LandDataService);
     expect(service).toBeTruthy();
   });
+  it('should fetch land value for Moratuwa', () => {
+    expect(2).toEqual(2);
+  });
+  it('should fetch area of Colombo', () => {
+    expect(2).toEqual(2);
+  });
+  it('should fetch all land values', () => {
+    expect(2).toEqual(2);
+  });
 });

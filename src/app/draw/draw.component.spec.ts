@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DrawComponent } from './draw.component';
+import {DrawComponent} from './draw.component';
 import {
   MatButtonModule,
   MatButtonToggleModule,
@@ -15,15 +15,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
-
-
 describe('DrawComponent', () => {
   let component: DrawComponent;
   let fixture: ComponentFixture<DrawComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrawComponent ],
+      declarations: [DrawComponent],
       imports: [
         MatExpansionModule,
         MatCardModule,
@@ -40,9 +38,9 @@ describe('DrawComponent', () => {
         AgmCoreModule,
         RouterModule.forRoot([]),
       ],
-      providers: [],
+      providers: [MapsAPILoader],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -51,7 +49,4 @@ describe('DrawComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

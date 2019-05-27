@@ -223,7 +223,7 @@ export class MapComponent implements OnInit {
   }
 
   sendCords() {
-    this.mapData.sendCords(this.linePoints, this.location).subscribe(data => {
+    this.mapData.sendCords(this.linePoints, this.location,12 ).subscribe(data => {
         console.log(data);
       }
     );

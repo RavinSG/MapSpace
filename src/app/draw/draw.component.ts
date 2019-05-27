@@ -4,6 +4,8 @@ import {switchMap} from 'rxjs/operators';
 import {MatButtonToggleChange, MatSnackBar} from '@angular/material';
 import {MapDataService} from '../services/map-data.service';
 import {MatSelectChange} from '@angular/material/typings/esm5/select';
+import {and} from '@angular/router/src/utils/collection';
+import {not} from 'rxjs/internal-compatibility';
 
 
 declare const google: any;
@@ -20,18 +22,22 @@ export class DrawComponent implements OnInit, DoCheck {
   mapType = 'hybrid';
   private pathDiffer: KeyValueDiffer<string, any>;
   private enableGeo = false;
-  private area = 0;
-  private unitType = 'sq.kms';
+  public area = 0;
+  public area_p = 0;
+  public unitType = 'sq.kms';
 
   details = {
-    'lng': 0,
-    'lat': 0
+    lng: 0,
+    lat: 0,
+    city: '',
   };
 
   center: any = {
     lat: 6.796867,
     lng: 79.900196,
-    zoom: 16
+    zoom: 16,
+    city: 'colombo',
+    value: 0
   };
 
 
@@ -43,6 +49,7 @@ export class DrawComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    this.mapData.reset();
     this.pathDiffer = this.differs.find(this.coordinates).create();
     console.log('params', this.route.snapshot.params);
     if (this.route.snapshot.params['lng']) {
@@ -52,9 +59,14 @@ export class DrawComponent implements OnInit, DoCheck {
       this.route.params.pipe(
         switchMap((params: Params) => this.details['lat'] = params['lat'])
       ).subscribe();
+      this.route.params.pipe(
+        switchMap((params: Params) => this.details['city'] = params['city'])
+      ).subscribe();
       this.center.lat = Number(this.details.lat);
       this.center.lng = Number(this.details.lng);
-
+      this.center.city = this.details.city;
+      this.getLandValue(this.center.city);
+      console.log(this.center);
     }
   }
 
@@ -84,8 +96,16 @@ export class DrawComponent implements OnInit, DoCheck {
   }
 
   sendCords(coordinates, sphere) {
-    this.mapData.sendCords(coordinates, sphere).subscribe(data => {
-        this.area = data;
+    this.mapData.sendCords(coordinates, sphere, this.unitType).subscribe(data => {
+        this.area = data.area;
+        this.area_p = data.area_p;
+        console.log('data', data);
+        console.log(this.area_p, this.center.value);
+        if (data.area_p > 5000 && !this.enableGeo) {
+          this.snackBar.open('For more accurate results enable Sphere Geometry', 'OK', {
+            duration: 4000
+          });
+        }
       }
     );
   }
@@ -184,5 +204,9 @@ export class DrawComponent implements OnInit, DoCheck {
       .subscribe(data => console.log(data));
   }
 
+  getLandValue(city: string) {
+    this.mapData.landValue(city)
+      .subscribe(data => this.center.value = data);
+  }
 
 }

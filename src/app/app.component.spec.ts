@@ -4,13 +4,15 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {MatToolbarModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MatToolbarModule
+        MatToolbarModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,

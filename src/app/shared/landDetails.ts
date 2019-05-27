@@ -6,3 +6,10 @@ export interface LandDetail {
   description: string;
   src: string;
 }
+
+export interface SavedLand {
+  id: number;
+  city: string;
+  area: number;
+  estimated: number;
+}

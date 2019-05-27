@@ -3,24 +3,9 @@ import {UserService} from '../services/user.service';
 import {LandDataService} from '../services/land-data.service';
 import {Chart} from 'chart.js';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {LandDetail} from '../shared/landDetails';
+import {LandDetail, SavedLand} from '../shared/landDetails';
 import {MatTableDataSource} from '@angular/material';
 
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-];
 
 @Component({
   selector: 'app-dashboard',
@@ -42,7 +27,7 @@ export class DashboardComponent implements OnInit {
   dataColumns = ['Land_Area', 'Price', 'ID', 'City'];
   expandedLand: LandDetail | null;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource2 = ELEMENT_DATA;
+  dataSource2: [SavedLand];
 
   public colour = 'lightblue';
   @ViewChild('chart') chartElementRef: ElementRef;
@@ -57,6 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.landService.getSavedLands().subscribe(data => this.dataSource2 = data);
     this.landService.getLandValues().subscribe(data => this.dataSource = new MatTableDataSource(data));
     this.userService.dailyForecast()
       .subscribe(res => {
